@@ -1,38 +1,166 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
   background-color: #282c34;
   min-height: 100vh;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+.center {
+  margin: auto;
+  width: 1000px;
+}
+.title {
+  margin: 0;
+  text-align: center;
+  color: aquamarine;
+}
+.carousel {
+  position: relative;
+  min-height: 700px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: flex-end;
+}
+.item {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: 200ms all ease-in-out;
+  transition-delay: 200ms;
+}
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.active {
+  opacity: 1;
+  z-index: 1;
+  transition-delay: 0ms;
 }
 
-.App-link {
-  color: #61dafb;
+.right, .left {
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: all .5s;
+  border: 2px solid transparent;
+
+}
+.right:hover, .left:hover, .right:focus, .left:focus{
+  background-color: rgba(0, 0, 0, .9);
+  border: 2px solid rgba(255, 255, 255, .8);
 }
 
-@keyframes App-logo-spin {
+button > svg {
+  fill: rgba(255, 255, 255, .7);
+}
+button:hover > svg {
+  fill: white;
+}
+.left {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1rem;
+  z-index: 2;
+}
+.right {
+  position: absolute;
+  z-index: 2;
+  transform: translateY(-50%);
+  top: 50%;
+  right: 1rem;
+}
+
+.dots{
+  position: relative;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, .8);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .5rem 0;
+}
+.dot {
+  margin: 0 .2rem;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  border-radius: 100%;
+  background: none;
+  cursor: pointer;
+  border: none;
+  transition: all .5s;
+  background-color: rgba(255, 255, 255, .7);
+}
+.active-dot {
+  background-color: white;
+  transform: scale(1.1);
+}
+.dot:hover{ 
+  background-color: white;
+}
+@keyframes enter-right {
   from {
-    transform: rotate(0deg);
+    transform: translateX(100%) scale(.5);
   }
   to {
-    transform: rotate(360deg);
+    transform: translateX(0) scale(1);
   }
+}
+@keyframes enter-left {
+  from {
+    transform: translateX(-100%) scale(.5);
+  }
+  to {
+    transform: translateX(0) scale(1);
+  }
+}
+@keyframes leave-right {
+  from {
+    transform: translateX(0) scale(1);
+  }
+  to {
+    transform: translateX(100%) scale(.5);
+  }
+}
+
+@keyframes leave-left {
+  from {
+    transform: translateX(0) scale(1);
+  }
+  to {
+    transform: translateX(-100%) scale(.5);
+  }
+}
+
+.enter-r {
+  animation-name: enter-right;
+  animation-duration: 400ms;
+}
+
+.enter-l {
+  animation-name: enter-left;
+  animation-duration: 400ms;
+}
+.leave-r {
+  animation-name: leave-right;
+  animation-duration: 400ms;
+}
+.leave-l {
+  animation-name: leave-left;
+  animation-duration: 400ms;
 }
